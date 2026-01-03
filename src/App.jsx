@@ -7,7 +7,6 @@ import Faq from "./pages/Faq";
 import Checkout from "./components/Checkout";
 import Dynamic from "./components/Dynamic";
 
-
 function App() {
   return (
     <>
@@ -23,11 +22,9 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-
       </main>
     </>
   );
 }
 
 export default App;
-

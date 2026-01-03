@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";   // ← changed from BrowserRouter
 import "./index.css";
 import App from "./App.jsx";
 import ScrollToTop from "./components/ScrollToTop";
