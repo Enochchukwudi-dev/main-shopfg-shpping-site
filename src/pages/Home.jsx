@@ -21,7 +21,7 @@ const Carousel = () => {
     { id: 4, title: 'Accessories', subtitle: 'Confidence & Comfort' },
   ]
   const [index, setIndex] = useState(0)
-  const [autoplay, setAutoplay] = useState(true)
+  const [autoplay] = useState(true)
   const navigate = useNavigate()
 
   const prev = () => setIndex(i => (i - 1 + slides.length) % slides.length)
@@ -38,16 +38,30 @@ const Carousel = () => {
 
   return (
     <div className="w-full overflow-hidden relative mt-5 ">
-      <div className="flex transition-transform duration-1000 md:duration-800 " style={{ transform: `translateX(-${index * 100}%)` }}>
+      <div className="flex transition-transform duration-1000 md:duration-800 " style={{ transform: `translateX(-${index * 100}%)`, willChange: 'transform' }}>
                 {slides.map((s, i) => (
           <div key={s.id} className="flex-shrink-0 min-w-full">
             <div
-              className={`slide-bg relative w-full px-0 pt-20 md:pt-35 pb-36 md:pb-55 flex flex-col items-center mt-3 text-center z-10 bg-transparent transition-transform duration-500 ${i === index ? 'scale-105 shadow-2xl' : ''}`}
-              style={(() => {
-                const img = i === 0 ? em1 : i === 1 ? em2 : i === 2 ? em4 : i === 3 ? em5 : i === 4 ? em6 : null
-                return img ? { backgroundImage: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'var(--bg-pos, center)', backgroundRepeat: 'no-repeat' } : undefined
-              })()}
+              className={`slide-bg relative w-full px-0 pt-20 md:pt-35 pb-36 md:pb-55 flex flex-col items-center mt-3 text-center bg-transparent transition-transform duration-500 ${i === index ? 'scale-105 shadow-2xl' : ''}`}
+              style={{ overflow: 'hidden' }}
             >
+              {(() => {
+                const img = i === 0 ? em1 : i === 1 ? em2 : i === 2 ? em4 : i === 3 ? em5 : i === 4 ? em6 : null
+                return img ? (
+                  <img
+                    src={img}
+                    alt={s.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="sync"
+                    width="1600"
+                    height="900"
+                    aria-hidden="true"
+                  />
+                ) : null
+              })()}
+
               <div className="absolute top-0 left-0 w-full h-59 bg-gradient-to-b from-orange-200/80 to-transparent pointer-events-none z-10" />
               <div className="mt-30 w-full max-w-xl relative z-20">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-roboto text-gray-900 tracking-wide uppercase white-text-shadow">
@@ -113,7 +127,7 @@ const Home = () => {
         const r = el.getBoundingClientRect()
         setCoords({ top: r.bottom, left: r.left, width: r.width })
       }
-    } catch (err) {
+    } catch {
       setCoords(null)
     }
   }
@@ -149,6 +163,28 @@ const Home = () => {
     }
   }, [])
 
+  // Preload hero carousel background images and warm up the browser image cache
+  useEffect(() => {
+    const imgs = [em1, em2, em4, em5, em6];
+    const links = [];
+    imgs.forEach(src => {
+      if (!src) return;
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      link.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(link);
+      links.push(link);
+      const i = new Image();
+      i.src = src;
+      i.decoding = 'sync';
+    });
+    return () => {
+      links.forEach(l => l.parentNode && l.parentNode.removeChild(l));
+    };
+  }, []);
+
   return (
     <>
       <section className="min-h-110 pt-7 md:pt-20 -mt-4 " style={{ backgroundColor: 'hsl(44, 45%, 93%)' }}>
@@ -164,7 +200,7 @@ const Home = () => {
               style={{ fontSize: 16 }}
               placeholder="Search products..."
             />
-            <img src={searchIcon} alt="search" className="h-5 w-5 text-gray-500" />
+            <img src={searchIcon} alt="search" className="h-5 w-5 text-gray-500" width="20" height="20" loading="eager" fetchPriority="high" decoding="async" />
 
             {/* dropdown will be rendered via portal to avoid stacking context issues */}
           </div>
@@ -176,7 +212,7 @@ const Home = () => {
           <div ref={dropdownRef} style={{ position: 'fixed', top: coords.top + 'px', left: coords.left + 'px', width: coords.width + 'px' }} className="bg-white rounded-lg shadow-lg max-h-64 overflow-auto z-[4000]">
             {results.map(r => (
               <button key={r.id} onClick={() => onSelect(r)} className="w-full flex items-center gap-3 p-2 hover:bg-gray-100">
-                <img src={r.image} alt={r.title} className="w-12 h-12 object-cover rounded" />
+                <img src={r.image} alt={r.title} className="w-12 h-12 object-cover rounded" width="48" height="48" loading="eager" fetchPriority="high" decoding="async" />
                 <div className="text-left">
                   <div className="text-sm font-medium text-gray-800">{r.title}</div>
                   <div className="text-xs text-gray-500">NGN {Number(r.price).toLocaleString()}</div>

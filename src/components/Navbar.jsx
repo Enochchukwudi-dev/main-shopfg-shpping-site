@@ -38,7 +38,7 @@ const Navbar = () => {
           const r = el.getBoundingClientRect()
           setCoords({ top: r.bottom, left: r.left, width: r.width })
         }
-      } catch (err) { setCoords(null) }
+      } catch { setCoords(null) }
     }
 
     const onSelect = (p) => {
@@ -81,13 +81,13 @@ const Navbar = () => {
             className="bg-transparent w-full placeholder:text-gray-500 text-gray-700 outline-none"
             placeholder="Search products..."
           />
-          <img src={searchIcon} alt="search" className="h-5 w-5 text-gray-500" />
+          <img src={searchIcon} alt="search" className="h-5 w-5 text-gray-500" width="20" height="20" loading="eager" fetchPriority="high" decoding="async" />
         </div>
         {results && results.length > 0 && coords && createPortal(
           <div ref={dropdownRef} style={{ position: 'fixed', top: coords.top + 'px', left: coords.left + 'px', width: coords.width + 'px' }} className="bg-white rounded-lg shadow-lg max-h-64 overflow-auto z-[4000]">
             {results.map(r => (
               <button key={r.id} onClick={() => onSelect(r)} className="w-full flex items-center gap-3 p-2 hover:bg-gray-100">
-                <img src={r.image} alt={r.title} className="w-12 h-12 object-cover rounded" />
+                <img src={r.image} alt={r.title} className="w-12 h-12 object-cover rounded" width="48" height="48" loading="eager" fetchPriority="high" decoding="async" />
                 <div className="text-left">
                   <div className="text-sm font-medium text-gray-800">{r.title}</div>
                   <div className="text-xs text-gray-500">NGN {Number(r.price).toLocaleString()}</div>
@@ -122,7 +122,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link to="/" className="flex items-center logo-left-413 absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none z-10">
-          <img src={logo} alt="Logo" className="h-12 w-auto" />
+          <img src={logo} alt="Logo" className="h-12 w-auto" width="48" height="48" loading="eager" fetchPriority="high" decoding="sync" style={{objectFit: 'contain'}} />
         </Link>
 
         {/* Search (desktop only) - placed between logo and nav links */}
@@ -199,7 +199,7 @@ const Navbar = () => {
       >
         <div className="px-6 pt-6 pb-4 border-b border-gray-200">
           <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
-            <img src={logo} alt="Logo" className="h-10 w-auto mb-3" />
+            <img src={logo} alt="Logo" className="h-10 w-auto mb-3" width="40" height="40" loading="eager" fetchPriority="high" decoding="sync" style={{objectFit: 'contain'}} />
           </Link>
         </div>
 
