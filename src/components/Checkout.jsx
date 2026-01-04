@@ -224,16 +224,21 @@ y = totalY + totalBoxH + 40
 
     const errors = {}
     if (!fullName.trim()) errors.fullName = 'Full name is required'
+    else if (fullName.trim().length < 3) errors.fullName = 'Full name must be at least 3 characters'
+
     if (!phone.trim()) errors.phone = 'Phone is required'
+    else if (phone.replace(/\D/g, '').length !== 11) errors.phone = 'Phone must be 11 digits'
+
     if (!address.trim()) errors.address = 'Delivery address is required'
+    else if (address.trim().length < 5) errors.address = 'Delivery address must be at least 5 characters'
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors)
       setTimeout(() => setFormErrors({ fullName: '', phone: '', address: '' }), 4000)
 
       try {
-        // Determine first invalid field
-        const firstInvalidRef = errors.fullName ? fullNameRef : errors.phone ? phoneRef : errors.address ? addressRef : null
+        // Determine first invalid field (prioritise phone so user isn't scrolled back to name)
+        const firstInvalidRef = errors.phone ? phoneRef : errors.fullName ? fullNameRef : errors.address ? addressRef : null
 
         if (firstInvalidRef && firstInvalidRef.current) {
           // Smooth scroll on mobile small screens, otherwise just focus
@@ -264,16 +269,30 @@ y = totalY + totalBoxH + 40
         .catch(() => showToast('Failed to send to Telegram', 3000))
     }
 
+    // snapshot items and total so we can clear the cart immediately
+    const itemsSnapshot = cart.items ? cart.items.map(i => ({ ...i })) : []
+    const totalSnapshot = orderTotal
+
     cart.clear?.()
     setFullName('')
     setPhone('')
     setAddress('')
     setOrderTotal(0)
+    setFormErrors({ fullName: '', phone: '', address: '' })
+
+    // remove focus from inputs so UI doesn't keep them active after clearing
+    try {
+      fullNameRef.current?.blur && fullNameRef.current.blur()
+      phoneRef.current?.blur && phoneRef.current.blur()
+      addressRef.current?.blur && addressRef.current.blur()
+    } catch (err) {
+      // ignore
+    }
 
     const message = encodeURIComponent(
       `New Order\n\nCustomer: ${fullName}\nPhone: ${phone}\nAddress: ${address}\n\nItems:\n` +
-      cart.items.map((item, idx) => `${idx + 1}. ${item.title} x${item.qty} - ₦${Number(item.price).toLocaleString()} each`).join('\n') +
-      `\n\nOrder Total: ₦${orderTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\nThank you!\nSend account details`
+      itemsSnapshot.map((item, idx) => `${idx + 1}. ${item.title} x${item.qty} - ₦${Number(item.price).toLocaleString()} each`).join('\n') +
+      `\n\nOrder Total: ₦${totalSnapshot.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\nThank you!\nSend account details`
     )
 
     window.location.href = `https://wa.me/2349162919586?text=${message}`
