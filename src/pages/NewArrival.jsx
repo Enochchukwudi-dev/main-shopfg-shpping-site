@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { products } from '../data/products'
 import { useCart } from '../context/CartContext'
 import { Link } from 'react-router-dom'
+import soldBadge from '../assets/soldout.png'
 
 function NewArrival({ limit, className = '', hideTitle = false, product = null }) {
   const cart = useCart()
@@ -56,11 +57,12 @@ function NewArrival({ limit, className = '', hideTitle = false, product = null }
           <div key={p.id} className=" rounded-lg border border-gray-100 shadow-sm overflow-hidden" style={{
         backgroundColor: 'hsl(44, 26%, 94%)',
       }}>
-            <div className="h-56 md:h-80 bg-gray-100 flex items-center justify-center overflow-hidden">
-              <Link to={`/product/${p.id}`} className="w-full h-full block">
-                <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
-              </Link>
-            </div>
+            <div className="h-56 md:h-80 bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                <Link to={`/product/${p.id}`} className="w-full h-full block">
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                </Link>
+                {p.soldOut && <img src={soldBadge} alt="Sold out" className="absolute top-2 right-2 w-12 h-12 pointer-events-none" />}
+              </div>
 
             <div className="p-4 text-center">
               <div className="text-[10px] tracking-widest uppercase text-gray-600 -mt-1">{p.title}</div>
@@ -73,7 +75,12 @@ function NewArrival({ limit, className = '', hideTitle = false, product = null }
                 <span className="text-xs text-gray-500 ml-2 ">{p.rating}</span>
               </div>
 
-              <button onClick={(e) => handleAdd(e, p)} className="mt-2 w-full bg-black text-white py-2 rounded-md text-sm hover:opacity-95 hover:cursor-pointer hover:text-orange-400">Add to cart</button>
+              <button
+                onClick={!p.soldOut ? (e) => handleAdd(e, p) : undefined}
+                disabled={p.soldOut}
+                className={`${p.soldOut ? 'mt-2 w-full bg-gray-300 text-gray-600 py-2 rounded-md text-sm cursor-not-allowed' : 'mt-2 w-full bg-black text-white py-2 rounded-md text-sm hover:opacity-95 hover:cursor-pointer hover:text-orange-400'}`}>
+                {p.soldOut ? 'SOLD OUT' : 'Add to cart'}
+              </button>
             </div>
           </div>
         ))}

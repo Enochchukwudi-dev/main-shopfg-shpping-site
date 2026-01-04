@@ -6,6 +6,7 @@ import NewArrival from '../pages/NewArrival'
 import Footer from '../pages/Footer'
 import leftIcon from '../assets/left.svg'
 import rightIcon from '../assets/right.svg'
+import soldBadge from '../assets/soldout.png'
 
 // Product metadata (colors and descriptions)
 const PRODUCT_META = {
@@ -183,6 +184,10 @@ function Dynamic({ product: propProduct }) {
                 style={undefined}
               />
 
+              {product.soldOut && (
+                <img src={soldBadge} alt="Sold out" className="absolute top-4 right-4 w-25 h-25 pointer-events-none z-30" />
+              )}
+
               {/* Thumbnails: use product.images if present, otherwise show the main image */}
               <div className="p-3 flex items-center gap-3">
                 {thumbImages.map((src, idx) => (
@@ -233,12 +238,17 @@ function Dynamic({ product: propProduct }) {
             </div>
 
             <div className="mt-8 flex items-center gap-4">
-              <button onClick={handleAddToCart} className="flex items-center gap-1 bg-black text-xs text-white px-4 py-3 rounded-md font-semibold shadow-sm cursor-pointer hover:opacity-95 hover:scale-[1.01] transition-transform duration-150 focus:outline-none focus:ring-2 focus:ring-amber-400">
+              <button
+                onClick={!product.soldOut ? handleAddToCart : undefined}
+                disabled={product.soldOut}
+                className={`${product.soldOut ? 'flex items-center gap-1 bg-gray-300 text-gray-600 px-4 py-3 rounded-md font-semibold shadow-sm cursor-not-allowed' : 'flex items-center gap-1 bg-black text-xs text-white px-4 py-3 rounded-md font-semibold shadow-sm cursor-pointer hover:opacity-95 hover:scale-[1.01] transition-transform duration-150 focus:outline-none focus:ring-2 focus:ring-amber-400'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4" strokeLinecap="round" strokeLinejoin="round"/><circle cx="9" cy="20" r="1"/><circle cx="20" cy="20" r="1"/></svg>
-                ADD TO CART
+                {product.soldOut ? 'SOLD OUT' : 'ADD TO CART'}
               </button>
 
-              <button onClick={handleBuyNow} className="px-4 py-3 rounded-md border border-black/20 text-xs font-semibold cursor-pointer hover:bg-black hover:text-white transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-amber-200">BUY NOW</button>
+              {!product.soldOut && (
+                <button onClick={handleBuyNow} className="px-4 py-3 rounded-md border border-black/20 text-xs font-semibold cursor-pointer hover:bg-black hover:text-white transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-amber-200">BUY NOW</button>
+              )}
 
               <button
                 onClick={toggleFavorite}
