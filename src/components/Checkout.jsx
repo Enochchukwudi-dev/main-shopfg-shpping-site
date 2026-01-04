@@ -295,7 +295,7 @@ y = totalY + totalBoxH + 40
       `\n\nOrder Total: ₦${totalSnapshot.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\nThank you!\nSend account details`
     )
 
-    window.location.href = `https://wa.me/2349162919586?text=${message}`
+    window.location.href = `https://wa.me/2349031161058?text=${message}`
     setIsProcessing(false)
   }
 
