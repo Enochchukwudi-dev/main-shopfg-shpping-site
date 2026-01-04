@@ -350,7 +350,7 @@ const Footer = () => {
                         openMail('followgodng01@gmail.com', 'Reaching out from folllowgod website');
                       }}
                       className="underline"
-                    >followgodng01@gmail.com</a> or call <a href="tel:+2349162919586" className="underline">+2349162919586</a>.
+                    >followgodng01@gmail.com</a> or call <a href="tel:+2349031161058" className="underline">+2349031161058</a>.
                   </p>
                 </div>
               </div>
