@@ -115,7 +115,7 @@ export default function WhatsAppFloat() {
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
       style={{ left: pos.x, top: pos.y, touchAction: 'none', pointerEvents: 'auto' }}
-      className={`hidden md:block fixed z-50 w-14 h-14 rounded-full shadow-lg ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+      className={`block fixed z-50 w-12 h-12 md:w-14 md:h-14 rounded-full shadow-lg ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       aria-grabbed={isDragging}
     >
       <a
