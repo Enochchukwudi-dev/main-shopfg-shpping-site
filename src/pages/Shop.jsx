@@ -38,6 +38,7 @@ const Shop = () => {
       if (category === 'beanie') list = list.filter((p) => /beanie/i.test(p.title));
       if (category === 'signature') list = list.filter((p) => /signature/i.test(p.title));
       if (category === 'tactical') list = list.filter((p) => /tactical/i.test(p.title));
+      if (category === 'tee') list = list.filter((p) => /tee/i.test(p.title));
     }
     if (sort === 'low-high') return list.sort((a, b) => a.price - b.price);
     if (sort === 'high-low') return list.sort((a, b) => b.price - a.price);
@@ -81,6 +82,7 @@ const Shop = () => {
                     <option value="beanie">Beanies</option>
                     <option value="signature">Signature Cap</option>
                     <option value="tactical">Tactical Cap</option>
+                    <option value="tee">Tee</option>
                   </select>
                 </div>
               </div>
