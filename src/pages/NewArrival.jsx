@@ -28,7 +28,9 @@ function NewArrival({ limit, className = '', hideTitle = false, product = null }
       const j = Math.floor(Math.random() * (i + 1))
       ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
-    return typeof limit === 'number' ? shuffled.slice(0, limit) : shuffled
+    const result = typeof limit === 'number' ? shuffled.slice(0, limit) : shuffled
+    // Remove duplicates based on id
+    return result.filter((item, index, self) => self.findIndex(p => p.id === item.id) === index)
   })
 
   useEffect(() => {
@@ -45,7 +47,9 @@ function NewArrival({ limit, className = '', hideTitle = false, product = null }
       const j = Math.floor(Math.random() * (i + 1))
       ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
-    setItems(typeof limit === 'number' ? shuffled.slice(0, limit) : shuffled)
+    const result = typeof limit === 'number' ? shuffled.slice(0, limit) : shuffled
+    // Remove duplicates based on id
+    setItems(result.filter((item, index, self) => self.findIndex(p => p.id === item.id) === index))
   }, [limit, product])
 
   return (

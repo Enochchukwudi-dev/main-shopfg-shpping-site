@@ -39,13 +39,20 @@ const Shop = () => {
     }
     if (sort === 'low-high') return list.sort((a, b) => a.price - b.price);
     if (sort === 'high-low') return list.sort((a, b) => b.price - a.price);
+    // Shuffle products in default sort
+    if (sort === 'default') {
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+    }
     return list;
   }, [sort, category]);
 
   return (
     <>
       <section className="min-h-screen bg-gray-50 py-12 md:pt-30" style={{
-        backgroundColor: 'hsl(44, 26%, 93%)',
+        backgroundColor: 'hsl(44, 26%, 96%)',
       }}>
         <div className="max-w-8xl mx-auto px-2 md:px-7">
           <div className="flex flex-col md:flex-row md:items-start justify-between mb-6 gap-4">

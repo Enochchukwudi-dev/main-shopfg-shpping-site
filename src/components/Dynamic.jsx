@@ -27,7 +27,22 @@ const PRODUCT_META = {
   15: { colors: ['Light Grey', 'Heather'], description: 'Light-grey beanie crafted for everyday warmth. The classic ribbed knit and moderate stretch ensure a secure, flattering fit.' },
   16: { colors: ['Navy Blue', 'Indigo'], description: 'Navy FG beanie combining a refined finish with insulating warmth. Subtle branding keeps the look clean and versatile.' },
   17: { colors: ['Deep Purple', 'Plum'], description: 'Deep-purple beanie with a rich knit texture and snug fit. Comfortable for daily wear and cooler evenings.' },
-  18: { colors: ['Wine Red', 'Burgundy'], description: 'Wine-red FG beanie with a cozy ribbed knit and fold-over cuff. A stylish, warm accessory that complements fall and winter outfits.' }
+  18: { colors: ['Wine Red', 'Burgundy'], description: 'Wine-red FG beanie with a cozy ribbed knit and fold-over cuff. A stylish, warm accessory that complements fall and winter outfits.' },
+  19: { colors: ['Black', 'White', 'Grey'], description: 'FG Fear of Average Tee — a bold statement piece celebrating individuality and breaking away from mediocrity. Premium cotton blend with screen-printed graphics for everyday wear.' },
+  20: { colors: ['Black', 'Navy', 'Grey'], description: 'FG Too Fly to Pray Tee — a lifestyle tee that blends street culture with confidence. Crafted from soft, durable cotton with embroidered FG branding.' },
+  21: { colors: ['Black', 'White', 'Navy'], description: 'FG 1% Better Tee — celebrating the grind and constant improvement. Premium quality t-shirt with bold graphic design and comfortable fit for all-day wear.' },
+  22: { colors: ['Black', 'White', 'Grey'], description: 'FG Highway to Heaven Tee — a spiritual yet street-inspired design. Made from premium cotton, perfect for layering or wearing solo with premium finishing.' },
+  23: { colors: ['Black', 'Navy', 'Charcoal'], description: 'FG Logo Tee — classic FG branding with premium finishing. Made from durable cotton with a comfortable fit for everyday wear.' },
+  24: { colors: ['Camo', 'Olive'], description: 'FG Tactical Cap (Camo) — rugged and versatile with a tactical design. Features reinforced stitching and an adjustable strap for a secure fit in any condition.' },
+  25: { colors: ['Grey', 'Charcoal'], description: 'FG Tactical Cap (Grey) — sleek and functional design perfect for tactical or casual styling. Built with durable materials and an adjustable closure.' },
+  26: { colors: ['Navy Blue', 'Black'], description: 'FG Tactical Cap (Navy Blue) — professional and versatile tactical cap with a structured design. Features breathable construction and adjustable fit.' },
+  27: { colors: ['Black', 'White'], description: 'FG Signature Cap (Black) — iconic FG signature design in classic black. Premium embroidery and quality construction for a distinctive look.' },
+  28: { colors: ['Pink', 'White'], description: 'FG Signature Cap (Pink) — bold and vibrant FG signature style. Stand out with this premium quality cap in a striking pink color.' },
+  29: { colors: ['Gray', 'White'], description: 'FG Signature Cap (Gray) — refined FG signature cap in neutral grey. Versatile and stylish for any outfit with premium finishing.' },
+  30: { colors: ['Red', 'White'], description: 'FG Signature Beanie (Red) — vibrant red signature beanie with premium knit quality. Provides warmth and style with iconic FG branding.' },
+  31: { colors: ['Black', 'White'], description: 'FG Signature Beanie (Black) — classic black signature beanie with soft, comfortable knit. Perfect for everyday wear with distinctive FG styling.' },
+  32: { colors: ['Red', 'Burgundy'], description: 'FG Signature Cap (Red) — bold red signature cap with premium quality construction. Makes a statement with vibrant color and iconic FG design.' },
+  33: { colors: ['Black', 'White'], description: 'FG 1% Better Tee Black — celebrating the grind and constant improvement in style. Premium quality t-shirt with bold graphic design and comfortable fit for all-day wear.' }
 }
 
 
@@ -54,13 +69,9 @@ function Dynamic({ product: propProduct }) {
   const [selectedThumb, setSelectedThumb] = useState(0)
   // responsive thumbnail size
   const THUMB_CLASS = 'w-15 h-15 sm:w-14 sm:h-14 md:w-16 md:h-16'
-  // prepare exactly three thumbnails: [image1, image2, image2]
+  // prepare thumbnails dynamically based on available images
   const _baseImages = product.images || product.gallery || [product.image]
-  const thumbImages = [
-    _baseImages[0] || product.image,
-    _baseImages[1] || _baseImages[0] || product.image,
-    _baseImages[1] || _baseImages[0] || product.image
-  ]
+  const thumbImages = _baseImages.length > 0 ? _baseImages : [product.image]
   const cart = useCart()
   const navigate = useNavigate()
 
@@ -82,7 +93,7 @@ function Dynamic({ product: propProduct }) {
     const src = thumbImages[i]
     setMainSrc(src)
     setSelectedThumb(i)
-    setFlipMain(i === 2)
+    setFlipMain(false)
     if (mainImgRef.current) mainImgRef.current.src = src
   }
 
@@ -195,13 +206,13 @@ function Dynamic({ product: propProduct }) {
                     key={idx}
                     onClick={() => {
                       setMainSrc(src)
-                      setFlipMain(idx === 2)
+                      setFlipMain(false)
                       setSelectedThumb(idx)
                       if (mainImgRef.current) mainImgRef.current.src = src
                     }}
                     className={`${THUMB_CLASS} rounded-md overflow-hidden flex-shrink-0 border ${selectedThumb === idx ? 'ring-2 ring-amber-400 border-transparent' : 'border-gray-100'}`}
                     aria-label={`Show image ${idx + 1}`}>
-                    <img src={src} alt={`${product.title} ${idx + 1}`} className={`${idx === 2 ? 'transform -scale-x-100' : ''} w-full h-full object-cover`} />
+                    <img src={src} alt={`${product.title} ${idx + 1}`} className={`w-full h-full object-cover`} />
                   </button>
                 ))}
               </div>

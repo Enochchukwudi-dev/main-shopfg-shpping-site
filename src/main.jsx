@@ -1,13 +1,17 @@
 import { createRoot } from "react-dom/client";
 import { HashRouter as Router } from "react-router-dom";
 import "./index.css";
-import lockImg from "./assets/lock.png";
+import App from "./App.jsx";
+import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppFloat from "./components/WhatsAppFloat";
+import { CartProvider } from "./context/CartContext";
 
 createRoot(document.getElementById("root")).render(
   <Router>
-    <div className="lock-viewport" role="img" aria-label="Website locked">
-      <img src={lockImg} alt="Website locked" />
-    </div>
+    <ScrollToTop />
+    <CartProvider>
+      <App />
+    </CartProvider>
+    <WhatsAppFloat />
   </Router>
 );
-
