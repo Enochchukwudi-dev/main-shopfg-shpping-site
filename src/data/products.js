@@ -88,7 +88,7 @@ export const products = [
   { id:20, title:'FG TOO FLY TO PRAY TEE WHITE', price:30000, image:neverfly2, images:[neverfly1, neverfly2], rating:4 },
   { id:18, title:'WINE RED BEANIE', price:20000, image:bean_red1, images:[bean_red1, bean_red2], rating:4 },
   { id:19, title:'FG FEAR OF AVERAGE TEE', price:30000, image:inspired2, images:[inspired2, inspired1], rating:4 },
-  { id:34, title:'FG FEAR OF AVERAGE TEE BLACK', price:30000, image:nvblack2, images:[nvblack2, nvblack1], rating:4 },
+  { id:34, title:'FG  TOO FLY TO PRAY TEE BLACK', price:30000, image:nvblack2, images:[nvblack2, nvblack1], rating:4 },
   { id:17, title:'DEEP PURPLE BEANIE', price:20000, image:bean_purple1, images:[bean_purple1, bean_purple2], rating:5 },
   { id:7, title:'BURGUNDY CAMO TRUCKER', price:15000, image:fg_violet1, images:[fg_violet1, fg_violet2], rating:4 },
   { id:22, title:'FG HIGHWAY TO HEAVEN TEE', price:30000, image:jesus, images:[jesus], rating:5 },
