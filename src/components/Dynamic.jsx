@@ -33,6 +33,7 @@ const PRODUCT_META = {
   21: { colors: ['Black', 'White', 'Navy'], description: 'FG 1% Better Tee — celebrating the grind and constant improvement. Premium quality t-shirt with bold graphic design and comfortable fit for all-day wear.' },
   22: { colors: ['Black', 'White', 'Grey'], description: 'FG Highway to Heaven Tee — a spiritual yet street-inspired design. Made from premium cotton, perfect for layering or wearing solo with premium finishing.' },
   23: { colors: ['Black', 'Navy', 'Charcoal'], description: 'FG Logo Tee — classic FG branding with premium finishing. Made from durable cotton with a comfortable fit for everyday wear.' },
+  34: { colors: ['Black'], description: 'FG Fear of Average Tee (Black) — premium cotton tee with a bold "Fear of Average" screenprint. Comfortable, true-to-size fit and finished with clean stitching.' },
   24: { colors: ['Camo', 'Olive'], description: 'FG Tactical Cap (Camo) — rugged and versatile with a tactical design. Features reinforced stitching and an adjustable strap for a secure fit in any condition.' },
   25: { colors: ['Grey', 'Charcoal'], description: 'FG Tactical Cap (Grey) — sleek and functional design perfect for tactical or casual styling. Built with durable materials and an adjustable closure.' },
   26: { colors: ['Navy Blue', 'Black'], description: 'FG Tactical Cap (Navy Blue) — professional and versatile tactical cap with a structured design. Features breathable construction and adjustable fit.' },

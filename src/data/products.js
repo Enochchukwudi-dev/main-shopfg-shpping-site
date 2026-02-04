@@ -39,6 +39,8 @@ import inspired1 from '../assets/inspired1.jpeg'
 import inspired2 from '../assets/inspired2.jpeg'
 import neverfly1 from '../assets/neverfly1.jpeg'
 import neverfly2 from '../assets/neverfly2.jpeg'
+import nvblack1 from '../assets/nvblack1.jpeg'
+import nvblack2 from '../assets/nvblack2.jpeg'
 import _1percent2 from '../assets/1percent2.jpeg'
 import nonamee from '../assets/nonamee.jpeg'
 import highway from '../assets/highway.jpeg'
@@ -83,9 +85,10 @@ export const products = [
   { id:14, title:'LIGHT GREEN BEANIE', price:20000, image:bean_green2, images:[bean_green1, bean_green2], rating:5 },
   { id:15, title:'LIGHT GREY BEANIE', price:20000, image:bean_grey1, images:[bean_grey1, bean_grey2], rating:4 },
   { id:16, title:'NAVY BLUE BEANIE', price:20000, image:bean_indigo1, images:[bean_indigo1, bean_indigo2], rating:4.5 },
-  { id:20, title:'FG TOO FLY TO PRAY TEE', price:30000, image:neverfly2, images:[neverfly1, neverfly2], rating:4 },
+  { id:20, title:'FG TOO FLY TO PRAY TEE WHITE', price:30000, image:neverfly2, images:[neverfly1, neverfly2], rating:4 },
   { id:18, title:'WINE RED BEANIE', price:20000, image:bean_red1, images:[bean_red1, bean_red2], rating:4 },
   { id:19, title:'FG FEAR OF AVERAGE TEE', price:30000, image:inspired2, images:[inspired2, inspired1], rating:4 },
+  { id:34, title:'FG FEAR OF AVERAGE TEE BLACK', price:30000, image:nvblack2, images:[nvblack2, nvblack1], rating:4 },
   { id:17, title:'DEEP PURPLE BEANIE', price:20000, image:bean_purple1, images:[bean_purple1, bean_purple2], rating:5 },
   { id:7, title:'BURGUNDY CAMO TRUCKER', price:15000, image:fg_violet1, images:[fg_violet1, fg_violet2], rating:4 },
   { id:22, title:'FG HIGHWAY TO HEAVEN TEE', price:30000, image:jesus, images:[jesus], rating:5 },
@@ -97,8 +100,8 @@ export const products = [
   { id:28, title:'FG SIGNATURE CAP (PINK)', price:20000, image:Signaturecap_pink, images:[Signaturecap_pink, Signaturecap_pink2, Signaturecap_pink3], rating:5},
   { id:29, title:'FG SIGNATURE CAP (GRAY)', price:20000, image:Signaturecap_gray, images:[Signaturecap_gray, Signaturecap_gray2, Signaturecap_gray3], rating:5},
   { id:32, title:'FG SIGNATURE CAP (RED)', price:20000, image:Signaturecap_red, images:[Signaturecap_red, Signaturecap_red2, Signaturecap_red3], rating:5},
-  { id:30, title:'FG SIGNATURE BEANIE (RED)', price:20000, image:signred, images:[signred, signred], rating:5},
-  { id:31, title:'FG SIGNATURE BEANIE (BLACK)', price:20000, image:signblack, images:[signblack, signblack], rating:5},
+  { id:30, title:'FG SIGNATURE BEANIE (RED)', price:10000, image:signred, images:[signred], rating:5},
+  { id:31, title:'FG SIGNATURE BEANIE (BLACK)', price:10000, image:signblack, images:[signblack], rating:5},
 
  
 ]
