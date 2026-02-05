@@ -109,9 +109,9 @@ const Navbar = () => {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 w-full shadow text-black font-semibold pt-3"
+      className="fixed top-0 left-0 right-0 z-50 w-full  text-black font-semibold pt-3"
       style={{
-        backgroundColor: 'hsl(44, 45%, 93%)',
+        backgroundColor: 'white',
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 py-6 flex justify-between items-center md:px-20">
@@ -195,7 +195,7 @@ const Navbar = () => {
         className={`md:hidden fixed top-0 left-0 h-full w-57 pt-6 rounded-r-2xl shadow-lg transform origin-left transition-transform duration-600 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} z-40 flex flex-col`}
         aria-hidden={!isOpen}
         role="navigation"
-        style={{ backgroundColor: 'hsl(44, 45%, 93%)' }}
+        style={{ backgroundColor: 'white' }}
       >
         <div className="px-6 pt-6 pb-4 border-b border-gray-200">
           <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">

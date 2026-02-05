@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../pages/Footer";
+import MountReveal from '../components/MountReveal' 
 
 const FAQ_ITEMS = [
   {
@@ -27,8 +28,8 @@ const Faq = () => {
 
   return (
     <>
-      <section className="min-h-screen  py-16 md:py-24"     style={{
-        backgroundColor: 'hsl(44, 45%, 94%)',
+      <MountReveal className="min-h-screen  py-16 md:py-24" style={{
+        backgroundColor: 'white',
       }}>
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
@@ -69,7 +70,7 @@ const Faq = () => {
             })}
           </div>
         </div>
-      </section>
+      </MountReveal>
       <Footer />
     </>
   );
